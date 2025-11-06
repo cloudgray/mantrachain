@@ -27,12 +27,7 @@ import (
 // CreateApp creates an evm app for regular integration tests (non-mempool)
 // This version uses a noop mempool to avoid state issues during transaction processing
 func CreateApp(chainID string, evmChainID uint64, customBaseAppOptions ...func(*baseapp.BaseApp)) evm.EvmApp {
-	// defaultNodeHome, err := clienthelpers.GetNodeHomeDirectory(".mantrachaind")
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	defaultNodeHome, err := os.MkdirTemp("", "mantrachain-evmd-1")
+	defaultNodeHome, err := os.MkdirTemp("", "temp-homedir")
 	if err != nil {
 		panic(err)
 	}
@@ -58,15 +53,20 @@ func CreateApp(chainID string, evmChainID uint64, customBaseAppOptions ...func(*
 // SetupEvmd initializes a new evmd app with default genesis state.
 // It is used in IBC integration tests to create a new evmd app instance.
 func SetupEvmd() (ibctesting.TestingApp, map[string]json.RawMessage) {
+	defaultNodeHome, err := os.MkdirTemp("", "temp-homedir")
+	if err != nil {
+		panic(err)
+	}
+
 	app := app.New(
 		log.NewNopLogger(),
 		dbm.NewMemDB(),
 		nil,
 		true,
-		NewAppOptionsWithFlagHomeAndChainID("", app.MANTRAChainID),
-		nil,
+		NewAppOptionsWithFlagHomeAndChainID(defaultNodeHome, app.MANTRAChainID),
 		nil,
 	)
+
 	// disable base fee for testing
 	genesisState := app.DefaultGenesis()
 	fmGen := feemarkettypes.DefaultGenesisState()

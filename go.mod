@@ -18,7 +18,7 @@ replace (
 	github.com/cosmos/cosmos-sdk => github.com/MANTRA-Chain/cosmos-sdk v0.53.4-mantra
 
 	// release/v0.5.x
-	github.com/cosmos/evm => github.com/MANTRA-Chain/evm v0.0.0-20251030091700-5c68a0a92be9
+	github.com/cosmos/evm => /Users/kyuhyeonchoi/workspace/cloudgray/mantra/evm
 
 	// branch: release/1.16
 	github.com/ethereum/go-ethereum => github.com/cosmos/go-ethereum v1.16.2-cosmos-1
@@ -332,6 +332,7 @@ require (
 	github.com/spf13/afero v1.14.0 // indirect
 	github.com/spiffe/go-spiffe/v2 v2.5.0 // indirect
 	github.com/stoewer/go-strcase v1.3.0 // indirect
+	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/supranational/blst v0.3.14 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20220721030215-126854af5e6d // indirect
